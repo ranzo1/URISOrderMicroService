@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.15
+VisualStudioVersion = 15.0.27004.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "URISOrderMicroService", "URISOrderMicroService\URISOrderMicroService.csproj", "{273CD117-80C2-46A7-A454-A188C16DBB4B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "URISOrderMicroService.Tests", "URISOrderMicroService.Tests\URISOrderMicroService.Tests.csproj", "{258123A7-9F1F-4175-B0DB-796D29A1E8D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "URISUtil", "..\URISUtil\URISUtil\URISUtil.csproj", "{3DC6A668-783B-4D14-A8B8-2FB1C718F78D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{258123A7-9F1F-4175-B0DB-796D29A1E8D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{258123A7-9F1F-4175-B0DB-796D29A1E8D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{258123A7-9F1F-4175-B0DB-796D29A1E8D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DC6A668-783B-4D14-A8B8-2FB1C718F78D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DC6A668-783B-4D14-A8B8-2FB1C718F78D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DC6A668-783B-4D14-A8B8-2FB1C718F78D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DC6A668-783B-4D14-A8B8-2FB1C718F78D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

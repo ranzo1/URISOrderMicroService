@@ -43,6 +43,11 @@ namespace URISOrderMicroService.DataAccess
            
         }
 
+        private static object CreateLikeQueryString(string str)
+        {
+            return str == null ? (object)DBNull.Value : "%" + str + "%";
+        }
+
         private static int ReadId(SqlDataReader reader)
         {
             return (int)reader["Id"];
@@ -85,14 +90,83 @@ namespace URISOrderMicroService.DataAccess
             command.Parameters.Add("@DeliveryZipCode", SqlDbType.NVarChar);
             command.Parameters["@DeliveryZipCode"].Value = order.DeliveryZipCode;
 
+            command.Parameters.Add("@DeliveryCity", SqlDbType.NVarChar);
+            command.Parameters["@DeliveryCity"].Value = order.DeliveryCity;
 
-           /* command.Parameters.Add("@DeliveryCity", SqlDbType.NVarChar);
             command.Parameters.Add("@Note", SqlDbType.NVarChar, order.Note);
-            command.Parameters.Add("@UserID", SqlDbType.NVarChar, order.UserID);
-            command.Parameters.Add("@Price", SqlDbType.Int, order.Price);
-            command.Parameters.Add("@Quantity", SqlDbType.NVarChar, order.Quantity);
-            command.Parameters.Add("@Active", SqlDbType.Bit, order.Active);*/
+            command.Parameters["@Note"].Value = order.Note;
+
+            command.Parameters.Add("@UserID", SqlDbType.Int, order.UserID);
+            command.Parameters["@UserID"].Value = order.UserID;
+
+            command.Parameters.Add("@Price", SqlDbType.Float, order.Price);
+            command.Parameters["@Price"].Value = order.Price;
+
+            command.Parameters.Add("@Quantity", SqlDbType.Int, order.Quantity);
+            command.Parameters["@Quantity"].Value = order.Quantity;
+
+            command.Parameters.Add("@Active", SqlDbType.Bit, order.Active);
+            command.Parameters["@Active"].Value = order.Active;
         }
+
+       /* public static List<Order> GetUsers(string userType, string userName, ActiveStatusEnum active, UserOrderEnum order, OrderEnum orderDirection)
+        {
+            try
+            {
+                List<Order> retVal = new List<Order>();
+
+                using (SqlConnection connection = new SqlConnection(DBFunctions.ConnectionString))
+                {
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandText = String.Format(@"
+                        SELECT
+                            {0}
+                        FROM
+                            [user].[User]
+                            JOIN [user].[UserType] ON [User].[UserTypeId] = [UserType].[Id]
+                        WHERE
+                            (@UserType IS NULL OR [user].[UserType].Name LIKE @UserType) AND
+                            (@UserName IS NULL OR [user].[User].Name LIKE @UserName) AND
+                            (@Active IS NULL OR [user].[User].Active = @Active)
+                    ", AllColumnSelect);
+                    command.Parameters.Add("@UserType", SqlDbType.NVarChar);
+                    command.Parameters.Add("@UserName", SqlDbType.NVarChar);
+                    command.Parameters.Add("@Active", SqlDbType.Bit);
+
+                    command.Parameters["@UserType"].Value = CreateLikeQueryString(userType);
+                    command.Parameters["@UserName"].Value = CreateLikeQueryString(userName);
+                    switch (active)
+                    {
+                        case ActiveStatusEnum.Active:
+                            command.Parameters["@Active"].Value = true;
+                            break;
+                        case ActiveStatusEnum.Inactive:
+                            command.Parameters["@Active"].Value = false;
+                            break;
+                        case ActiveStatusEnum.All:
+                            command.Parameters["@Active"].Value = DBNull.Value;
+                            break;
+                    }
+
+                    System.Diagnostics.Debug.WriteLine(command.CommandText);
+                    connection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            retVal.Add(ReadRow(reader));
+                        }
+                    }
+                }
+                return retVal;
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLog(ex);
+                throw ErrorResponse.ErrorMessage(HttpStatusCode.BadRequest, ex);
+            }
+        }*/
 
 
     }
